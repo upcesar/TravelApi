@@ -2,7 +2,7 @@
 
 namespace TravelManagement.Domain.Entities;
 
-public class User : Entity
+public class Users : Entity
 {
     public string Email { get; init; }
     public string FullName { get; set; }

@@ -17,4 +17,8 @@
     <ProjectReference Include="..\TravelManagement.Domain\TravelManagement.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\ScriptSql\" />
+  </ItemGroup>
+
 </Project>

@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 
 namespace TravelManagement.Infra.Data.Context;
 
-public abstract class DbContext : IDbContext
+public class DbContext : IDbContext
 {
     private readonly DatabaseConfig _databaseConfig;
 
@@ -18,7 +18,7 @@ public abstract class DbContext : IDbContext
 
     public IDbContext SelectContext()
     {
-        ConnectDatabase();
+        Connection ??= new SqlConnection(_databaseConfig.ConnectionString);
 
         if (Connection.State is not ConnectionState.Open)
         {
@@ -37,9 +37,5 @@ public abstract class DbContext : IDbContext
         }
 
         Connection?.Dispose();
-    }
-    private void ConnectDatabase()
-    {
-        Connection ??= new SqlConnection(_databaseConfig.ConnectionString);
     }
 }

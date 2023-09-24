@@ -1,7 +1,12 @@
 using TravelManagement.Domain.Interfaces;
+using TravelManagement.Infra.Data;
+using TravelManagement.Infra.Data.Context;
+using TravelManagement.Infra.Data.Repositories;
+using TravelManagement.Infra.Data.UoW;
 using TravelManagement.Infra.ExternalServices;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -12,6 +17,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ITravelService, DummyTravelService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDbContext, DbContext>();
+builder.Services.AddScoped(provider => new DatabaseConfig(configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

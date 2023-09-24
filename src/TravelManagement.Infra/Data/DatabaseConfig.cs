@@ -2,5 +2,10 @@
 
 public class DatabaseConfig
 {
-    public string ConnectionString { get; set; }
+    public string ConnectionString { get; init; }
+
+    public DatabaseConfig(string connectionString)
+    {
+        ConnectionString = connectionString;
+    }
 }
