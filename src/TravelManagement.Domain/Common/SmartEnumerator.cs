@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 namespace TravelManagement.Domain.Common;
-public abstract class SmartEnumerator
+public abstract class SmartEnumerator : IComparable<SmartEnumerator>, IEquatable<SmartEnumerator>
 {
     public int Id { get; }
     public string Name { get; set; }
@@ -36,9 +36,41 @@ public abstract class SmartEnumerator
     {
         return AsEnumerable<T>().SingleOrDefault(e => e.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
     }
+    public int CompareTo(SmartEnumerator other)
+    {
+        return Id.CompareTo(other.Id);
+    }
+
+    public virtual bool Equals(SmartEnumerator other)
+    {
+        return other is not null
+            && GetType().Equals(other.GetType())
+            && object.Equals(Id, other.Id)
+            && object.Equals(Name, other.Name);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(GetType(), Id);
+    }
+
+    public override bool Equals(object obj)
+    {
+        return ReferenceEquals(this, obj) || (obj is not null);
+    }
 
     public override string ToString()
     {
         return Name;
+    }
+
+    public static bool operator ==(SmartEnumerator left, SmartEnumerator right)
+    {
+        return left?.Equals(right) ?? right is null;
+    }
+
+    public static bool operator !=(SmartEnumerator left, SmartEnumerator right)
+    {
+        return !(left == right);
     }
 }
