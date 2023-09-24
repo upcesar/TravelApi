@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using TravelManagement.Domain.Common;
 using TravelManagement.Domain.SmartEnums;
-using TravelManagement.Infra.Services;
+using TravelManagement.Infra.ExternalServices;
 using Xunit;
 
-namespace TravelManagement.UnitTest;
+namespace TravelManagement.UnitTest.ExternalService;
 
 public class TravelTests
 {
@@ -13,7 +13,7 @@ public class TravelTests
     {
         // Arrange
         var expectedCountriesCount = SmartEnumerator.AsEnumerable<Countries>().Count();
-        var service = new TravelService();
+        var service = new DummyTravelService();
 
         // Act
         var result = service.GetCountriesForecast();

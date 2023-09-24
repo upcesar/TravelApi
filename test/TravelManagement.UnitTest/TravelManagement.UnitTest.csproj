@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\src\TravelManagement.Infra\TravelManagement.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\" />
+  </ItemGroup>
+
 </Project>
