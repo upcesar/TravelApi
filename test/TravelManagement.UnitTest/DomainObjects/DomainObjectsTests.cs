@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Bogus;
+using FluentAssertions;
 using TravelManagement.Domain.Common;
 using TravelManagement.Domain.SmartEnums;
 using Xunit;
@@ -30,5 +31,31 @@ public class DomainObjectsTests
 
         // Assert
         result.Should().Be(Countries.Brazil);
+    }
+
+    [Fact]
+    public void SmartEnum_GetByInvalidId_ShouldReturnNull()
+    {
+        // Arrange
+        var invalidCountryId = new Faker().Random.Number(100, 1000);
+
+        // Act
+        var result = SmartEnumerator.Get<Countries>(invalidCountryId);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    [Fact]
+    public void SmartEnum_GetByRandomName_ShouldReturnNull()
+    {
+        // Arrange
+        var invalidCountryName = new Faker().Random.Word();
+
+        // Act
+        var result = SmartEnumerator.Get<Countries>(invalidCountryName);
+
+        // Assert
+        result.Should().BeNull();
     }
 }
