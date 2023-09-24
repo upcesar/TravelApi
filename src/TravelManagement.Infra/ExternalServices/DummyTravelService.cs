@@ -3,9 +3,9 @@ using TravelManagement.Domain.Entities;
 using TravelManagement.Domain.Interfaces;
 using TravelManagement.Domain.SmartEnums;
 
-namespace TravelManagement.Infra.Services;
+namespace TravelManagement.Infra.ExternalServices;
 
-public class TravelService : ITravelService
+public class DummyTravelService : ITravelService
 {
     public IEnumerable<Weather> GetCountriesForecast()
     {

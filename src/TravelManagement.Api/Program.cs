@@ -1,5 +1,5 @@
 using TravelManagement.Domain.Interfaces;
-using TravelManagement.Infra.Services;
+using TravelManagement.Infra.ExternalServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,7 @@ builder.Services.AddRouting(option => option.LowercaseUrls = true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ITravelService, TravelService>();
+builder.Services.AddScoped<ITravelService, DummyTravelService>();
 
 var app = builder.Build();
 
