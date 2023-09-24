@@ -6,4 +6,3 @@ public interface IUserRepository : ICrudRepository<Users>
 {
     Task<Users> GetByEmailAndPasswordAsync(string email, string password);
 }
-

@@ -5,7 +5,8 @@ using TravelManagement.Domain.SmartEnums;
 using Xunit;
 
 namespace TravelManagement.UnitTest.DomainObjects;
-public class DomainObjectsTests
+
+public class SmartEnumTests
 {
     [Fact]
     public void SmartEnum_GetById_ShouldReturnEnum()

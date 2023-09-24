@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TravelManagement.Domain.Entities;
 using TravelManagement.Domain.Interfaces;
 
 namespace TravelManagement.Api.Controllers;
@@ -22,5 +23,12 @@ public class TravelController : ControllerBase
     {
         var weather = _travelService.GetCountriesForecast();
         return Ok(weather);
+    }
+
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<IActionResult> SignIn(Users users)
+    {
+
     }
 }
