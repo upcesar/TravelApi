@@ -1,17 +1,19 @@
 ﻿using FluentValidation;
-using TravelManagement.Domain.Common;
+using FluentValidation.Results;
 
-namespace TravelManagement.Domain.Entities;
+namespace TravelManagement.Api.Application.Commands;
 
-public class Users : Entity
+public class SignInCommand
 {
-    public string Email { get; init; }
-    public string FullName { get; init; }
-    public string Password { get; init; }
+    public string Email { get; set; }
+    public string FullName { get; set; }
+    public string Password { get; set; }
 
-    public override bool IsValid => Validate();
+    public bool IsValid => Validate();
 
-    public Users(string email, string fullName, string password)
+    public ValidationResult ValidationResult { get; protected set; } = new ValidationResult();
+
+    public SignInCommand(string email, string fullName, string password)
     {
         Email = email;
         FullName = fullName;
@@ -20,13 +22,13 @@ public class Users : Entity
 
     private bool Validate()
     {
-        ValidationResult = new UsersValidation().Validate(this);
+        ValidationResult = new SignInCommandValidation().Validate(this);
         return ValidationResult.IsValid;
     }
 
-    private class UsersValidation : AbstractValidator<Users>
+    private class SignInCommandValidation : AbstractValidator<SignInCommand>
     {
-        public UsersValidation()
+        public SignInCommandValidation()
         {
             RuleFor(u => u.Email)
                 .NotEmpty()

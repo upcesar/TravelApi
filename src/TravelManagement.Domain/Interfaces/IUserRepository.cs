@@ -2,7 +2,7 @@
 
 namespace TravelManagement.Infra.Data.Repositories;
 
-public interface IUserRepository : ICrudRepository<Users>
+public interface IUserRepository : ICrudRepository<User>
 {
-    Task<Users> GetByEmailAndPasswordAsync(string email, string password);
+    Task<User> GetByEmailAndPasswordAsync(string email, string password);
 }

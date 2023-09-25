@@ -12,8 +12,8 @@ public class UserEntityTest
     {
         // Arrange
         var complexPassword = "P4$$w0rd;H@rd";
-        var user = new Faker<Users>()
-            .CustomInstantiator(fake => new Users(fake.Person.Email, fake.Person.FullName, complexPassword))
+        var user = new Faker<User>()
+            .CustomInstantiator(fake => new User(fake.Person.Email, fake.Person.FullName, complexPassword))
             .Generate();
 
         // Act
@@ -27,7 +27,7 @@ public class UserEntityTest
     public void User_FieldsEmpty_ShouldNotBeValid()
     {
         // Arrange
-        var user = new Users(string.Empty, string.Empty, string.Empty);
+        var user = new User(string.Empty, string.Empty, string.Empty);
 
         // Act
         var result = user.IsValid;

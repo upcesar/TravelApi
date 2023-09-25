@@ -1,3 +1,4 @@
+using TravelManagement.Api.Services;
 using TravelManagement.Domain.Interfaces;
 using TravelManagement.Infra.Data;
 using TravelManagement.Infra.Data.Context;
@@ -17,6 +18,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ITravelService, DummyTravelService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDbContext, DbContext>();
 builder.Services.AddScoped(provider => new DatabaseConfig(configuration.GetConnectionString("DefaultConnection")));
