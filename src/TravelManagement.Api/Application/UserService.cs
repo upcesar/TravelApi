@@ -11,12 +11,14 @@ namespace TravelManagement.Api.Services;
 
 public class UserService : IUserService
 {
+    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IUserRepository _userRepository;
     private readonly IEncryptService _encryptService;
     private readonly IJwtUtils _jwtUtils;
 
-    public UserService(IUserRepository userRepository, IEncryptService encryptService, IJwtUtils jwtUtils)
+    public UserService(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, IEncryptService encryptService, IJwtUtils jwtUtils)
     {
+        _httpContextAccessor = httpContextAccessor;
         _userRepository = userRepository;
         _encryptService = encryptService;
         _jwtUtils = jwtUtils;
@@ -35,6 +37,20 @@ public class UserService : IUserService
         var token = _jwtUtils.GenerateJwtToken(user);
 
         return new AuthenticateResponse(user, token);
+    }
+
+    public async Task<ProfileResponse> GetProfile()
+    {
+        var httpContext = _httpContextAccessor.HttpContext;
+        var claim = httpContext.User.Claims.FirstOrDefault(c => c.Type == "id");
+
+        if (Guid.TryParse(claim.Value, out var userId))
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            return new ProfileResponse(user);
+        }
+
+        return null;
     }
 
     public async Task<ValidationResult> Register(UserRequest request)

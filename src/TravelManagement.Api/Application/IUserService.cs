@@ -8,4 +8,6 @@ public interface IUserService
 {
     Task<ValidationResult> Register(UserRequest request);
     Task<AuthenticateResponse> Authenticate(LoginRequest request);
+
+    Task<ProfileResponse> GetProfile();
 }

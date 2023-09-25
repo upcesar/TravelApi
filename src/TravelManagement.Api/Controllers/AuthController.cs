@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TravelManagement.Api.Requests;
 using TravelManagement.Api.Services;
-using TravelManagement.Infra.Data.Repositories;
 
 namespace TravelManagement.Api.Controllers;
 
@@ -12,7 +11,6 @@ public class AuthController : ControllerBase
 {
     private readonly ILogger<TravelController> _logger;
     private readonly IUserService _userService;
-    private readonly IUserRepository _userRepository;
 
     public AuthController(ILogger<TravelController> logger, IUserService userService)
     {
@@ -48,6 +46,7 @@ public class AuthController : ControllerBase
     [HttpGet("user/me")]
     public async Task<IActionResult> GetProfile()
     {
-        return Ok(await Task.FromResult("Secret Area"));
+        var response = await _userService.GetProfile();
+        return Ok(response);
     }
 }
