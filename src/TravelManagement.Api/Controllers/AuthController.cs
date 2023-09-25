@@ -29,10 +29,19 @@ public class AuthController : ControllerBase
 
         if (response.IsValid)
         {
-            return CreatedAtAction(nameof(GetProfile), new { fullName = request.FullName, email = request.Email });
+            return CreatedAtAction(nameof(Login), new { email = request.Email });
         }
 
         return BadRequest(response);
+    }
+
+    [AllowAnonymous]
+    [HttpPost("user/login")]
+    public async Task<IActionResult> Login(LoginRequest request)
+    {
+        var response = await _userService.Authenticate(request);
+
+        return response is null ? Unauthorized() : Ok(response);
     }
 
     [Authorize]

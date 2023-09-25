@@ -10,7 +10,7 @@ public interface ICrudRepository<TEntity> : IDisposable where TEntity : Entity
 
     Task<IEnumerable<TEntity>> GetAllAsync();
 
-    Task<TEntity> GetByIdAsync(string id);
+    Task<TEntity> GetByIdAsync(Guid id);
 
     Task UpdateAsync(TEntity entity);
 

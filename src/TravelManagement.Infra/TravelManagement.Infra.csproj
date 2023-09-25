@@ -10,7 +10,10 @@
     <PackageReference Include="Dapper" Version="2.0.151" />
     <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
     <PackageReference Include="DapperExtension.Core" Version="1.6.8.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Data\ScriptSql\" />
-    <Folder Include="Security\Auth\" />
   </ItemGroup>
 
 </Project>

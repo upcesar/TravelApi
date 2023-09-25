@@ -34,7 +34,7 @@ public abstract class BaseRepository<TEntity> : ICrudRepository<TEntity> where T
         return await Connection.GetAllAsync<TEntity>(Transaction);
     }
 
-    public async Task<TEntity> GetByIdAsync(string id)
+    public async Task<TEntity> GetByIdAsync(Guid id)
     {
         return await Connection.GetAsync<TEntity>(id, Transaction);
     }
