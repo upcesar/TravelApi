@@ -12,8 +12,8 @@ public class SignInCommandTest
     {
         // Arrange
         var complexPassword = "P4$$w0rd;H@rd";
-        var user = new Faker<SignInCommand>()
-                    .CustomInstantiator(fake => new SignInCommand(fake.Person.Email, fake.Person.FullName, complexPassword))
+        var user = new Faker<UserRegistrationCommand>()
+                    .CustomInstantiator(fake => new UserRegistrationCommand(fake.Person.Email, fake.Person.FullName, complexPassword))
                     .Generate();
 
         // Act
@@ -27,7 +27,7 @@ public class SignInCommandTest
     public void User_FieldsEmpty_ShouldNotBeValid()
     {
         // Arrange
-        SignInCommand signIn = new(string.Empty, string.Empty, string.Empty);
+        UserRegistrationCommand signIn = new(string.Empty, string.Empty, string.Empty);
 
         // Act
         var result = signIn.IsValid;

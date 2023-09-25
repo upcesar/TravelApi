@@ -39,7 +39,7 @@ public class UserService : IUserService
 
     public async Task<ValidationResult> Register(UserRequest request)
     {
-        var command = new SignInCommand(request.Email, request.FullName, request.Password);
+        var command = new UserRegistrationCommand(request.Email, request.FullName, request.Password);
 
         if (command.IsValid)
         {

@@ -3,7 +3,7 @@ using FluentValidation.Results;
 
 namespace TravelManagement.Api.Application.Commands;
 
-public class SignInCommand
+public class UserRegistrationCommand
 {
     public string Email { get; set; }
     public string FullName { get; set; }
@@ -13,7 +13,7 @@ public class SignInCommand
 
     public ValidationResult ValidationResult { get; protected set; } = new ValidationResult();
 
-    public SignInCommand(string email, string fullName, string password)
+    public UserRegistrationCommand(string email, string fullName, string password)
     {
         Email = email;
         FullName = fullName;
@@ -22,13 +22,13 @@ public class SignInCommand
 
     private bool Validate()
     {
-        ValidationResult = new SignInCommandValidation().Validate(this);
+        ValidationResult = new UserRegistrationCommandValidation().Validate(this);
         return ValidationResult.IsValid;
     }
 
-    private class SignInCommandValidation : AbstractValidator<SignInCommand>
+    private class UserRegistrationCommandValidation : AbstractValidator<UserRegistrationCommand>
     {
-        public SignInCommandValidation()
+        public UserRegistrationCommandValidation()
         {
             RuleFor(u => u.Email)
                 .NotEmpty()
