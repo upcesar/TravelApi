@@ -5,6 +5,7 @@ using TravelManagement.Infra.Data.Context;
 using TravelManagement.Infra.Data.Repositories;
 using TravelManagement.Infra.Data.UoW;
 using TravelManagement.Infra.ExternalServices;
+using TravelManagement.Infra.Security.Cryptography;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -26,6 +27,7 @@ builder.Services.AddScoped<IDbContext, DbContext>();
 builder.Services.AddScoped(provider => new DatabaseConfig(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IEncryptService, MD5EncryptService>();
 
 var app = builder.Build();
 

@@ -3,6 +3,7 @@ using TravelManagement.Api.Application.Commands;
 using TravelManagement.Api.Requests;
 using TravelManagement.Domain.Entities;
 using TravelManagement.Infra.Data.Repositories;
+using TravelManagement.Infra.Security.Cryptography;
 
 namespace TravelManagement.Api.Services;
 
@@ -14,10 +15,12 @@ public interface IUserService
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IEncryptService _encryptService;
 
-    public UserService(IUserRepository userRepository)
+    public UserService(IUserRepository userRepository, IEncryptService encryptService)
     {
         _userRepository = userRepository;
+        _encryptService = encryptService;
     }
 
     public async Task<ValidationResult> SignIn(UserRequest request)
@@ -26,7 +29,7 @@ public class UserService : IUserService
 
         if (command.IsValid)
         {
-            var user = new User(command.Email, command.FullName, command.Password);
+            var user = new User(command.Email, command.FullName, _encryptService.Encrypt(command.Password));
             await _userRepository.InsertAsync(user);
         }
 
