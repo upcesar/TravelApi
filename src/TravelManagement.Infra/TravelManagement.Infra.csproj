@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Data\ScriptSql\" />
+    <Folder Include="Security\Auth\" />
+    <Folder Include="Security\Cryptography\" />
   </ItemGroup>
 
 </Project>

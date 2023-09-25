@@ -1,20 +1,20 @@
 ﻿using Bogus;
 using FluentAssertions;
-using TravelManagement.Domain.Entities;
+using TravelManagement.Api.Application.Commands;
 using Xunit;
 
 namespace TravelManagement.UnitTest.DomainObjects;
 
-public class UserEntityTest
+public class SignInCommandTest
 {
     [Fact]
     public void User_AllFieldsFilled_ShouldBeValid()
     {
         // Arrange
         var complexPassword = "P4$$w0rd;H@rd";
-        var user = new Faker<User>()
-            .CustomInstantiator(fake => new User(fake.Person.Email, fake.Person.FullName, complexPassword))
-            .Generate();
+        var user = new Faker<SignInCommand>()
+                    .CustomInstantiator(fake => new SignInCommand(fake.Person.Email, fake.Person.FullName, complexPassword))
+                    .Generate();
 
         // Act
         var result = user.IsValid;
@@ -27,10 +27,10 @@ public class UserEntityTest
     public void User_FieldsEmpty_ShouldNotBeValid()
     {
         // Arrange
-        var user = new User(string.Empty, string.Empty, string.Empty);
+        SignInCommand signIn = new(string.Empty, string.Empty, string.Empty);
 
         // Act
-        var result = user.IsValid;
+        var result = signIn.IsValid;
 
         // Assert
         result.Should().BeFalse();
