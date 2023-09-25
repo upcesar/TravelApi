@@ -9,7 +9,7 @@ namespace TravelManagement.Api.Services;
 
 public interface IUserService
 {
-    Task<ValidationResult> SignIn(UserRequest request);
+    Task<ValidationResult> Register(UserRequest request);
 }
 
 public class UserService : IUserService
@@ -23,7 +23,7 @@ public class UserService : IUserService
         _encryptService = encryptService;
     }
 
-    public async Task<ValidationResult> SignIn(UserRequest request)
+    public async Task<ValidationResult> Register(UserRequest request)
     {
         var command = new SignInCommand(request.Email, request.FullName, request.Password);
 
